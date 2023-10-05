@@ -13,6 +13,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
+/**
+ * Custom header filter without Spring Security. This filter is applied directly into the
+ * {@link org.apache.catalina.core.ApplicationFilterChain}, so no firewalling with Spring Security is in place!! This is
+ * just for demonstration purpose.
+ */
 @Component
 @Slf4j
 public class MyHeaderFilter extends OncePerRequestFilter {
@@ -31,18 +36,14 @@ public class MyHeaderFilter extends OncePerRequestFilter {
 
         ArrayList<String> rqHeaders = Collections.list(request.getHeaderNames());
 
-        rqHeaders.forEach(header -> {
-            log.trace(String.format(" %-30s: %s", header, request.getHeader(header)));
-        });
+        rqHeaders.forEach(header -> log.trace(String.format(" %-30s: %s", header, request.getHeader(header))));
     }
 
     private static void logResponse(HttpServletResponse response) {
         log.trace("Response headers:");
 
         Collection<String> headerNames = response.getHeaderNames();
-        headerNames.forEach(header -> {
-            log.trace(String.format(" %-30s: %s", header, response.getHeader(header)));
-        });
+        headerNames.forEach(header -> log.trace(String.format(" %-30s: %s", header, response.getHeader(header))));
     }
 
     private static void filterInOut(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException {

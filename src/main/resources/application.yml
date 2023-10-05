@@ -1,14 +1,14 @@
 logging:
   level:
-    org.springframework.security: TRACE
-    com.example.andi.demo.*: TRACE
-    org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping: TRACE
+    org.springframework.security: TRACE # prints Spring Security filter chain selections for various request paths and REST endpoint definitions, defined by the REST controllers within this project
+    com.example.andi.demo.*: TRACE # enables MyHeaderFilter to print request and response headers
+    org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping: TRACE # enables printing DispatcherServlet mappings defined by the REST controllers in this project
 
 spring.security:
   user.name: admin
-  user.password: admin
+  user.password: admin # very, very insecure HTTP basic auth password, but this is a demo project
 
 server:
   error:
     whitelabel:
-      enabled: false
+      enabled: false # Disables the annoying whitelabel error page and prints TomCat status pages instead
